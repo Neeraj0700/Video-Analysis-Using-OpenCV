@@ -69,6 +69,16 @@ def rootwindow():
                 #  cv2.imshow("Input Image", input_image)
                 # cv2.imshow("Frame", input_test)
                 # cv2.waitKey(0)
+            if matches[0] == False:
+                face_detect = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+                face_data = face_detect.detectMultiScale(input_test, 1.3, 5)
+                y1, x2, y2, x1 = face_location
+                cv2.rectangle(input_test, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                roi = input_test[y1:y2, x1:x2]
+                roi = cv2.GaussianBlur(roi, (23, 23), 30)
+                input_test[y1:y1 + roi.shape[0], x1:x1 + roi.shape[1]] = roi
+                cv2.imshow("Frame", input_test)
+                cv2.waitKey(0)
     sec = int(frames - 1)
     seconds = "Duration in seconds : " + str(sec)
     dwell = "Video time : " + str(datetime.timedelta(seconds=sec))
