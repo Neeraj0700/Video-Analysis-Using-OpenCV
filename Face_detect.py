@@ -38,7 +38,7 @@ def rootwindow():
     cap.release()
 
     # Input Image
-    input_image = face_recognition.load_image_file('saved_img.jpg')
+    input_image = face_recognition.load_image_file('Elon_Musk_2015.jpg')
     input_image = cv2.cvtColor(input_image, cv2.COLOR_BGR2RGB)
 
     # Input Image Face Recognition and encoding
@@ -64,11 +64,6 @@ def rootwindow():
             matchIndex = np.nanargmin(faceDis)
             if matches[matchIndex]:
                 frames = frames + 1
-                # y1, x2, y2, x1 = face_location
-                # cv2.rectangle(input_test,(x1,y1), (x2,y2), (0,255,0),2)
-                #  cv2.imshow("Input Image", input_image)
-                # cv2.imshow("Frame", input_test)
-                # cv2.waitKey(0)
             if matches[0] == False:
                 face_detect = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
                 face_data = face_detect.detectMultiScale(input_test, 1.3, 5)
